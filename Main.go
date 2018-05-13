@@ -28,6 +28,6 @@ func main() {
 		}
 
 		DisplayNotification(songs[0])
-		time.Sleep(4 * time.Minute)
+		time.Sleep(210 * time.Second)
 	}
 }
