@@ -8,13 +8,13 @@ import (
 
 func main() {
 	var help = flag.Bool("h", false, "lists all commands")
-	var show_all = flag.Bool("all", false, "shows last 25 songs")
+	var notify = flag.Bool("n", false, "show notification for now playing every 210secs")
 
 	flag.Parse()
 
 	if *help == true {
 		fmt.Println("-h\tfor showing this message")
-		fmt.Println("-all\tfor showing last 25 songs")
+		fmt.Println("-n\tshow notification for now playing every 210secs")
 		return
 	}
 
@@ -22,12 +22,12 @@ func main() {
 		jsonFromLink := GetJSONFromLink()
 		songs := saveJSONToDataStruct(jsonFromLink)
 
-		if *show_all == true {
+		if *notify == true {
+			DisplayNotification(songs[0])
+			time.Sleep(210 * time.Second)
+		} else {
 			PrintAllSongs(songs)
 			return
 		}
-
-		DisplayNotification(songs[0])
-		time.Sleep(210 * time.Second)
 	}
 }
