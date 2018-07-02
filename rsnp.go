@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"time"
 )
 
@@ -13,8 +12,7 @@ func main() {
 	flag.Parse()
 
 	if *help == true {
-		fmt.Println("-h\tfor showing this message")
-		fmt.Println("-n\tshow notification for now playing every 210secs")
+		flag.PrintDefaults()
 		return
 	}
 
