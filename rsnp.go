@@ -9,7 +9,7 @@ var LAST_SONG map[string]interface{}
 
 func main() {
 	var help = flag.Bool("h", false, "lists all commands")
-	var notify = flag.Bool("n", false, "show notification for now playing every 210secs")
+	var notify = flag.Bool("n", false, "show notification for now playing")
 
 	flag.Parse()
 
