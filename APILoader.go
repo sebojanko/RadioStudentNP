@@ -23,7 +23,7 @@ func GetJSONFromLink() []byte {
 	return responseData
 }
 
-func saveJSONToDataStruct(jsonFromLink []byte) []map[string]interface{} {
+func SaveJSONToDataStruct(jsonFromLink []byte) []map[string]interface{} {
 	argsMap := make(map[string]interface{})
 
 	err := json.Unmarshal(jsonFromLink, &argsMap)

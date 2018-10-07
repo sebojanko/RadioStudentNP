@@ -5,6 +5,8 @@ import (
 	"time"
 )
 
+var LAST_SONG map[string]interface{}
+
 func main() {
 	var help = flag.Bool("h", false, "lists all commands")
 	var notify = flag.Bool("n", false, "show notification for now playing every 210secs")
@@ -18,14 +20,26 @@ func main() {
 
 	for {
 		jsonFromLink := GetJSONFromLink()
-		songs := saveJSONToDataStruct(jsonFromLink)
+		songs := SaveJSONToDataStruct(jsonFromLink)
 
 		if *notify == true {
-			DisplayNotification(songs[0])
-			time.Sleep(210 * time.Second)
+			if isSongNew(songs[0]) {
+				DisplayNotification(songs[0])
+			}
+			saveSong(songs[0])
+			time.Sleep(30 * time.Second)
 		} else {
 			PrintAllSongs(songs)
 			return
 		}
 	}
+}
+func saveSong(song map[string]interface{}) {
+	LAST_SONG = song
+}
+func isSongNew(song map[string]interface{}) bool {
+	if LAST_SONG["played_song"] == song["played_song"] {
+		return false
+	}
+	return true
 }
